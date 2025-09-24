@@ -10,18 +10,18 @@ import {
 import { type Invoice } from "../../../domain/Invoice";
 import useInvoiceForm from "./useInvoiceForm";
 
-const InvoiceForm = ({ saveNewInvoice, formRef }: { saveNewInvoice: (invoice: Invoice) => void, formRef: React.Ref<FormikProps<Invoice>> }): JSX.Element => {
+const InvoiceForm = ({ saveNewInvoice, formRef, invoiceToEdit }: { saveNewInvoice: (invoice: Invoice) => void, formRef: React.Ref<FormikProps<Invoice>>, invoiceToEdit?: Invoice }): JSX.Element => {
   const { validationSchema } = useInvoiceForm();
 
   return (
     <Formik
       innerRef={formRef}
       initialValues={{
-        id: crypto.randomUUID(),
-        client: "",
-        date: "",
-        amount: 0,
-        status: "Unpaid",
+        id: invoiceToEdit?.id || crypto.randomUUID(),
+        client: invoiceToEdit?.client || "",
+        date: invoiceToEdit?.date || new Date().toISOString().split('T')[0],
+        amount: invoiceToEdit?.amount || 0,
+        status: invoiceToEdit?.status || "Unpaid",
       }}
       validationSchema={validationSchema}
       onSubmit={(values: Invoice, { resetForm }) => {

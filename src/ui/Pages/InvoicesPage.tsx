@@ -1,16 +1,17 @@
 import { useEffect, type JSX, useState, useRef } from 'react';
-import { useInvoiceStore } from "../../store/invoiceStore";
-import { getInvoices } from "../../application/usecases/getInvoices";
-import { FlatfileImport, InvoiceForm, InvoiceTable, Modal } from "../components";
 import { CButton } from "@coreui/react";
-import { createInvoice } from '../../application/usecases/createInvoice';
 import type { FormikProps } from 'formik';
+import { useInvoiceStore } from "../../store/invoiceStore";
+import { getInvoices } from "../../application/usecases/Invoices/getInvoices";
+import { FlatfileImport, InvoiceForm, InvoiceTable, Modal } from "../components";
 import type { Invoice } from '../../domain/Invoice';
+import { updateInvoice, createInvoice, deleteInvoice } from '../../application/usecases';
 
 const InvoicesPage = (): JSX.Element => {
-  const [visible, setVisible] = useState(false);
   const setInvoices = useInvoiceStore((state) => state.setInvoices);
   const formRef = useRef<FormikProps<Invoice>>(null);
+  const [visible, setVisible] = useState(false);
+  const [invoiceToEdit, setInvoiceToEdit] = useState<Invoice | undefined>(undefined);
 
 
 
@@ -22,34 +23,46 @@ const InvoicesPage = (): JSX.Element => {
     <div className="p-4 flex flex-col gap-6">
       <h1 className="text-2xl font-bold">Invoices</h1>
       <Modal
-        title="Create a new Invoice"
+        title={invoiceToEdit ? "Edit Invoice" : "New Invoice"}
         body={<InvoiceForm saveNewInvoice={
           (invoice: Invoice) => {
-            createInvoice(invoice).then(() => {
-              setVisible(false);
-            });
+            if (invoiceToEdit) {
+              updateInvoice(invoice);
+              setInvoiceToEdit(undefined);
+            } else {
+              createInvoice(invoice);
+            }
+            setVisible(false);
           }
-        } formRef={formRef} />}
+        } formRef={formRef}
+          invoiceToEdit={invoiceToEdit}
+        />}
         footer={
           <>
-            <CButton color="secondary" onClick={() => setVisible(false)}>
+            <CButton color="secondary" onClick={() => {
+              setInvoiceToEdit(undefined);
+              setVisible(false);
+            }}>
               Close
             </CButton>
             <CButton
               onClick={() => {
                 formRef.current?.submitForm();
               }}
-              color="primary">Save changes</CButton>
+              color="primary">{invoiceToEdit ? "Save Changes" : "Create Invoice"}</CButton>
           </>
         }
         visible={visible}
-        onClose={() => setVisible(false)}
+        onClose={() => {
+          setInvoiceToEdit(undefined);
+          setVisible(false);
+        }}
       />
       <CButton color="primary" onClick={() => setVisible(true)}>
         New Invoice
       </CButton>
       <FlatfileImport />
-      <InvoiceTable />
+      <InvoiceTable setInvoiceToEdit={setInvoiceToEdit} setVisible={setVisible} deleteInvoice={deleteInvoice} />
     </div>
   );
 }

@@ -1,5 +1,5 @@
-import { type Invoice } from "../../domain/Invoice";
-import { useInvoiceStore } from "../../store/invoiceStore";
+import { type Invoice } from "../../../domain/Invoice";
+import { useInvoiceStore } from "../../../store/invoiceStore";
 
 export function createInvoice(invoice: Invoice): Promise<void> {
   const { addInvoice } = useInvoiceStore.getState();
