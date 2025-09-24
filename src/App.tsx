@@ -3,9 +3,7 @@ import { InvoicesPage } from "./ui"
 function App() {
 
   return (
-    <>
       <InvoicesPage />
-    </>
   )
 }
 

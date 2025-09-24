@@ -1,7 +1,10 @@
 import { type Invoice } from "../../domain/Invoice";
 import { useInvoiceStore } from "../../store/invoiceStore";
 
-export const createInvoice = (invoice: Invoice) => {
+export function createInvoice(invoice: Invoice): Promise<void> {
   const { addInvoice } = useInvoiceStore.getState();
-  addInvoice(invoice);
+  return new Promise((resolve) => {
+    addInvoice(invoice);
+    resolve();
+  });
 };

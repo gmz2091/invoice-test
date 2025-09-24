@@ -1,10 +1,10 @@
 import type { JSX } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { type ColDef } from "ag-grid-community";
-import { type Invoice } from "../../domain/Invoice";
+import { type Invoice } from "../../../domain/Invoice";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { useInvoiceStore } from "../../store/invoiceStore";
+import { useInvoiceStore } from "../../../store/invoiceStore";
 
 const InvoiceTable = (): JSX.Element => {
   const invoices = useInvoiceStore((state) => state.invoices);

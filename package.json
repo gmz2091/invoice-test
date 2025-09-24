@@ -12,6 +12,9 @@
   "dependencies": {
     "@coreui/coreui": "^5.4.3",
     "@coreui/react": "^5.7.1",
+    "@flatfile/hooks": "^1.6.0",
+    "@flatfile/react": "^7.13.10",
+    "@tailwindcss/vite": "^4.1.12",
     "ag-grid-react": "^34.1.2",
     "flatfile": "^3.11.1",
     "formik": "^2.4.6",
@@ -23,6 +26,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@flatfile/api": "^1.23.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.0",

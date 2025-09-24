@@ -1,69 +1,157 @@
-# React + TypeScript + Vite
+This project is a **Frontend Developer Challenge** solution: an invoicing module built with **React**, **Vite**, **CoreUI Pro**, **Formik**, **Yup**, **Zustand**, **AG Grid**, and **TailwindCSS**. It allows users to **view, filter, and create invoices** with a fully validated form.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## 🏗️ Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 18** + **Vite**  
+- **CoreUI Pro** – UI components  
+- **TailwindCSS** – Layout, spacing, and responsive styling  
+- **Formik** + **Yup** – Form handling and validation  
+- **Zustand** – State management  
+- **AG Grid** – Invoice table  
+- **Storybook** – Component isolation (optional)  
+- **Flatfile** – CSV import (optional)  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📦 Features
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 1. Invoice List Table
+- Display invoices in a table with **AG Grid**.
+- Columns:
+  - Invoice Number
+  - Client Name
+  - Date
+  - Status (Paid / Unpaid)
+  - Amount (USD)
+- Filter by **status** and **date range**.
+- Supports **mock data** or JSON API.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+**Example Screenshot:**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+![Invoice Table Screenshot](./screenshots/invoice-table.png)
+
+---
+
+### 2. Invoice Form
+- Add a **new invoice** through a modal or dedicated page.
+- Uses **Formik + Yup** for validation:
+  - All fields required
+  - Amount must be > 0
+- Fields:
+  - Client Name (text input)
+  - Date (date picker)
+  - Amount (number input)
+  - Status (dropdown: Paid / Unpaid)
+- Saves invoices in **local state with Zustand**.
+
+**Example Form Screenshot:**
+
+![Invoice Form Screenshot](./screenshots/invoice-form.png)
+
+---
+
+### 3. Design Consistency
+- CoreUI Pro components for inputs, buttons, and layout.
+- TailwindCSS for spacing, flex layout, and responsiveness.
+- Matches Figma/Design specifications closely.
+
+---
+
+### 4. Optional Features
+- **CSV Import:** Integrate Flatfile to upload invoices.
+- **Storybook:** Document components like `InvoiceForm` or `InvoiceTable`.
+
+---
+
+## ⚙️ Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/invoicing-module.git
+cd invoicing-module
+````
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+3. Run the development server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
+# or
+yarn dev
 ```
+
+4. Open in your browser:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 📝 Project Structure
+
+```
+src/
+ ├─ application/
+ │    └─ usecases/       # Business logic (createInvoice, etc.)
+ ├─ domain/
+ │    └─ Invoice.ts      # Invoice type/interface
+ ├─ features/
+ │    └─ invoice/
+ │         ├─ InvoiceForm.tsx
+ │         ├─ useInvoiceForm.ts
+ │         └─ InvoiceTable.tsx
+ ├─ store/
+ │    └─ invoiceStore.ts # Zustand store for invoices
+ └─ main.tsx             # App entry point
+```
+
+---
+
+## ✅ Usage
+
+1. **View Invoices:** See existing invoices in the table with filtering.
+2. **Add Invoice:** Fill out the invoice form; validation ensures correctness.
+3. **Optional CSV Import:** Upload invoices via CSV.
+4. **State Management:** All invoices are saved locally using Zustand.
+
+---
+
+## 🧪 Evaluation Criteria
+
+| Category              | Description                                        |
+| --------------------- | -------------------------------------------------- |
+| 🔧 Technical Accuracy | Clean, modular code following best practices       |
+| 🎨 UI Consistency     | CoreUI + Tailwind matches design                   |
+| ⚙️ Functionality      | Invoice table, form, and validation work correctly |
+| 📦 State Management   | Proper use of Zustand                              |
+| ✅ Form Validation     | Formik + Yup validation implemented                |
+| 📚 Documentation      | Clear README and component documentation           |
+| 🌍 Bonus              | CSV import via Flatfile or Storybook components    |
+
+---
+
+## 💡 Notes / Assumptions
+
+* This project uses **mock data** for invoices.
+* CoreUI Pro components are styled with **TailwindCSS** for layout.
+* Formik `<Form>` is used for form submission; CoreUI inputs are used for styling.
+* `InvoiceForm.tsx` avoids nested `<form>` warnings by connecting Formik’s `handleSubmit` to `CForm`.
+* Validation errors are shown inline using **CFormFeedback**.
+
+---
+
+## 🔗 Links
+
+* **Live Demo (optional):** \[Vercel/Netlify link]
+
