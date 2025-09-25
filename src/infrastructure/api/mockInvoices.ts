@@ -6,13 +6,13 @@ export const mockInvoices: Invoice[] = [
     client: "ACME Corp",
     date: "2023-08-01",
     amount: 1200,
-    status: "Paid",
+    status: "paid",
   },
   {
     id: "2",
     client: "Globex",
     date: "2023-08-15",
     amount: 850,
-    status: "Unpaid",
+    status: "unpaid",
   },
 ];

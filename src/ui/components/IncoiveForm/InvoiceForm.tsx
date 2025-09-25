@@ -17,11 +17,11 @@ const InvoiceForm = ({ saveNewInvoice, formRef, invoiceToEdit }: { saveNewInvoic
     <Formik
       innerRef={formRef}
       initialValues={{
-        id: invoiceToEdit?.id || crypto.randomUUID(),
+        id: invoiceToEdit?.id || "",
         client: invoiceToEdit?.client || "",
         date: invoiceToEdit?.date || new Date().toISOString().split('T')[0],
         amount: invoiceToEdit?.amount || 0,
-        status: invoiceToEdit?.status || "Unpaid",
+        status: invoiceToEdit?.status || "unpaid",
       }}
       validationSchema={validationSchema}
       onSubmit={(values: Invoice, { resetForm }) => {
@@ -90,8 +90,8 @@ const InvoiceForm = ({ saveNewInvoice, formRef, invoiceToEdit }: { saveNewInvoic
               name="status"
               invalid={touched.status && !!errors.status}
             >
-              <option value="Paid">Paid</option>
-              <option value="Unpaid">Unpaid</option>
+              <option value="paid">Paid</option>
+              <option value="unpaid">Unpaid</option>
             </Field>
             <ErrorMessage
               name="status"

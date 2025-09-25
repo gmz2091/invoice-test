@@ -1,10 +1,8 @@
 import { type Invoice } from "../../../domain/Invoice";
-import { useInvoiceStore } from "../../../store/invoiceStore";
+import { invoiceApi } from "../../../infrastructure/api/invoiceApi";
+import { getInvoices } from "./getInvoices";
 
-export function createInvoice(invoice: Invoice): Promise<void> {
-  const { addInvoice } = useInvoiceStore.getState();
-  return new Promise((resolve) => {
-    addInvoice(invoice);
-    resolve();
-  });
+export async function createInvoice(invoice: Invoice): Promise<void> {
+  await invoiceApi.createInvoiceApi(invoice);
+  getInvoices();
 };

@@ -5,7 +5,7 @@ const useInvoiceForm = () => {
     client: Yup.string().required("Required"),
     date: Yup.date().required("Required"),
     amount: Yup.number().positive().required("Required"),
-    status: Yup.string().oneOf(["Paid", "Unpaid"]).required("Required"),
+    status: Yup.string().oneOf(["paid", "unpaid"]).required("Required"),
   });
 
   return { validationSchema };

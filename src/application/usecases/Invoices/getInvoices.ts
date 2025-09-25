@@ -1,6 +1,10 @@
 import { type Invoice } from "../../../domain/Invoice";
-import { mockInvoices } from "../../../infrastructure/api/mockInvoices";
+import { invoiceApi } from "../../../infrastructure/api/invoiceApi";
+import { useInvoiceStore } from "../../../store/invoiceStore";
 
 export const getInvoices = async (): Promise<Invoice[]> => {
-  return Promise.resolve(mockInvoices);
+  const invoices = await invoiceApi.fetchInvoicesApi();
+  const { setInvoices } = useInvoiceStore.getState();
+  setInvoices(invoices);
+  return invoices;
 };
