@@ -3,7 +3,7 @@ import { CButton } from "@coreui/react";
 import type { FormikProps } from 'formik';
 import { useInvoiceStore } from "../../store/invoiceStore";
 import { getInvoices } from "../../application/usecases/Invoices/getInvoices";
-import { FlatfileImport, InvoiceForm, InvoiceTable, Modal } from "../components";
+import { InvoiceForm, InvoiceTable, Modal } from "../components";
 import type { Invoice } from '../../domain/Invoice';
 import { updateInvoice, createInvoice, deleteInvoice } from '../../application/usecases';
 
