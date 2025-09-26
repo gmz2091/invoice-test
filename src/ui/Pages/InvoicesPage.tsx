@@ -61,7 +61,6 @@ const InvoicesPage = (): JSX.Element => {
       <CButton color="primary" onClick={() => setVisible(true)}>
         New Invoice
       </CButton>
-      <FlatfileImport />
       <InvoiceTable setInvoiceToEdit={setInvoiceToEdit} setVisible={setVisible} deleteInvoice={deleteInvoice} />
     </div>
   );
