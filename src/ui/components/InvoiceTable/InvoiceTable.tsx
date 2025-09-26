@@ -35,7 +35,7 @@ const InvoiceTable = ({ setInvoiceToEdit, setVisible, deleteInvoice }: { setInvo
             <CButton
               size="sm"
               color="danger"
-              onClick={() => deleteInvoice(invoice.id)}
+              onClick={() => deleteInvoice(invoice.id as string)}
             >
               Delete
             </CButton>
